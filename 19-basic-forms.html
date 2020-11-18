@@ -7,6 +7,8 @@
     function UsernameForm() {
       function handleSubmit(event) {
         event.preventDefault()
+        //uses id you created, can also use name prop on the input
+        // common to use htmlFor in label and id in input to connect them
         const username = event.target.elements.usernameInput.value
         alert(`You entered: ${username}`)
       }
