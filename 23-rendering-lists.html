@@ -22,6 +22,8 @@
         setItems(items.filter(i => i !== item))
       }
 
+      //child's key must be unique and static so identity is persistent throughout rerenders
+
       return (
         <div>
           <button disabled={items.length >= allItems.length} onClick={addItem}>

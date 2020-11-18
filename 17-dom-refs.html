@@ -47,6 +47,7 @@
       const tiltRef = React.useRef()
 
       React.useEffect(() => {
+        // current = mutate without triggering rerender
         const tiltNode = tiltRef.current
         const vanillaTiltOptions = {
           max: 25,
@@ -55,6 +56,9 @@
           'max-glare': 0.5,
         }
         VanillaTilt.init(tiltNode, vanillaTiltOptions)
+        // ensures proper garbage collection to avoid memory leak with abundance of tiltNode refs clogging up memory
+        // effect dependency array added so this only runs on initial render / first mount and subsequently when necessary / on unmount clean up fn
+        // array is empty since this info is static / will not change
         return () => {
           tiltNode.vanillaTilt.destroy()
         }
@@ -81,7 +85,9 @@
           </label>
           {showTilt ? (
             <Tilt>
-              <div className="totally-centered">vanilla-tilt.js</div>
+              <div className="totally-centered">
+                <img src="https://raw.githubusercontent.com/lgm527/me/master/src/assets/headshot_sm.jpeg"/>  
+              </div>
             </Tilt>
           ) : null}
         </div>
